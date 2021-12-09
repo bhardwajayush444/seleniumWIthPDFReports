@@ -7,10 +7,12 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
 
 public class apiStepDefs {
+    @Autowired
     private apiFactory apiSpec;
     public static Response response;
     public static ValidatableResponse vresponse;

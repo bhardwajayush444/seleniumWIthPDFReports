@@ -4,74 +4,72 @@ import io.cucumber.java.mk_latn.No;
 
 public class linkedList {
     Node head;
-    static class Node{
-        int data;
-        Node next;
-        Node(int d){
-            this.data=d;
-            next=null;
-        }
-    }
-    public void printList(){
-        Node n=head;
-        while(n!=null){
-            System.out.println(n.data+" ");
-            n=n.next;
-        }
-    }
-    public void push(int newData){
-        Node new_node=new Node(newData);
+    class Node{
+       int data;
+       Node next;
+       public Node(int data){
+           this.data=data;
+           next=null;
+       }
+
+       }
+    public void push(int data){
+        Node new_node=new Node(data);
         new_node.next=head;
         head=new_node;
-
     }
-    public void insert_after(Node prev_node,int data){
-        if (prev_node == null)
-        {
-            System.out.println("The given previous node cannot be null");
-            return;
-        }
-        Node new_node = new Node(data);
+    public void insertAfter(Node prev_node,int data){
+        Node new_node=new Node(data);
         new_node.next=prev_node.next;
         prev_node.next=new_node;
-
     }
-    public void append(int new_data) {
-        Node new_node = new Node(new_data);
+    public void append(int data){
+        Node new_node=new Node(data);
         if(head==null){
-            head=new Node(new_data);
+            head=new Node(data);
             return;
         }
         new_node.next=null;
-        Node last = head;
-        while (last.next != null)
-            last = last.next;
+        Node last=head;
+        while(last.next!=null)
+            last=last.next;
 
-        /* 6. Change the next of last node */
-        last.next = new_node;
+        last.next=new_node;
         return;
     }
-    public void delete(int key){
-        Node temp=head,prev=null;
-        if(temp!=null && temp.data==key){
-            head=temp.next;
-            return;
+    public void printList(){
+        Node tnode=head;
+        while(tnode.next!=null){
+            System.out.println(tnode.data);
+            tnode=tnode.next;
         }
-        while(temp!=null && temp.data!=key){
-            prev=temp;
-            temp=temp.next;
-        }
-        prev.next=temp.next;
-    }
+   }
+
 
 
     public static void main(String[] args){
-        linkedList list=new linkedList();
-        list.head=new Node(1);
-        Node second=new Node(2);
-        Node third=new Node(4);
-        list.head.next=second;
-        second.next=third;
-        list.printList();
+        linkedList llist = new linkedList();
+
+        // Insert 6.  So linked list becomes 6->NUllist
+        llist.append(6);
+
+        // Insert 7 at the beginning. So linked list becomes
+        // 7->6->NUllist
+        llist.push(7);
+
+        // Insert 1 at the beginning. So linked list becomes
+        // 1->7->6->NUllist
+        llist.push(1);
+
+        // Insert 4 at the end. So linked list becomes
+        // 1->7->6->4->NUllist
+        llist.append(4);
+
+        // Insert 8, after 7. So linked list becomes
+        // 1->7->8->6->4->NUllist
+        llist.insertAfter(llist.head.next, 8);
+
+        System.out.println("\nCreated Linked list is: ");
+        llist.printList();
     }
 }
